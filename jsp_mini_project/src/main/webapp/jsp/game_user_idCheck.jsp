@@ -27,7 +27,7 @@
 	</form>
 </body>
 <script>
-	function popClose(UserId) {
+	function popClose(userId) {
 		opener.document.join.userId.value = userId;
 		window.close();
 	}
@@ -37,7 +37,7 @@
 			alert("아이디를 입력해 주세요!");
 			return;
 		} else {
-			location.href = "user_idCheck.jsp?id=" + id;
+			location.href = "game_user_idCheck.jsp?userId=" + userId;
 		}
 	}
 </script>

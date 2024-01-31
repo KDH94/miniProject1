@@ -29,8 +29,7 @@ fieldset {
     border: 1px solid rgb(50, 62, 76);
 }
 
-fieldset legend,
-table {
+fieldset legend, table {
     color: #fff;
 }
 
@@ -130,6 +129,10 @@ ul li div {
     background-color: #bbb;
 }
 
+.btn-check {
+	width: 100px;
+}
+
 .caution {
     color: rgb(171, 55, 58);
     line-height: 80px;
@@ -155,7 +158,7 @@ ul li div {
     border-radius: 10px 0px 0px 10px;
     float: left;
     margin-top: 15px;
-
+    color: #fff;
 }
 
 .search-btn {
@@ -250,4 +253,20 @@ li:hover .submenu {
 
 .footer-menu:hover {
     color: rgb(103, 193, 245);
+}
+
+table, tr, th, td {
+	border : 2px solid #ccc;
+	padding : 5px 10px;
+	border-collapse: collapse;
+	text-align: center;
+}
+th {
+	background-color: rgb(122, 130, 139);
+}
+
+.si-alter {
+	float: none;
+	border-radius: 10px;
+	
 }

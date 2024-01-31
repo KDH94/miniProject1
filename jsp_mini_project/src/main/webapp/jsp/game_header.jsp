@@ -13,7 +13,7 @@
     <div id="container">
         <header id="gh-header" class="gh-header">
             <div class="main-logo">
-                <a href="game_home.html">🎮</a>
+                <a href="game_home.jsp">🎮</a>
             </div>
             <div>
                 <form name="search_form">
@@ -24,8 +24,8 @@
                 </form>
             </div>
             <div class="head-login">
-                <a href="game_login.html" class="btn-default btn-gh">로그인</a>
-                <a href="game_join.html" class="btn-default btn-gh">회원가입</a>
+                <a href="game_login.jsp" class="btn-default btn-gh">로그인</a>
+                <a href="game_join.jsp" class="btn-default btn-gh">회원가입</a>
                 <a class="btn-default btn-cart">🛒</a>
             </div>
         </header>

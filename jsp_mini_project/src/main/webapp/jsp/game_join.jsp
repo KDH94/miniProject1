@@ -21,7 +21,7 @@
                         <span>
                             <input type="text" id="userId" name="userId" class="join-input" required placeholder="5글자 이상, 10글자 이하 입력" required autofocus>
                         </span>
-                        <input class="btn-default" id="btn_idCheck" value="중복확인" onclick="idCheck()">
+                        <input class="btn-default btn-check" id="btn_idCheck" value="중복확인" onclick="idCheck()">
                     </li>
                     <li>
                         <div class="join-divide">비밀번호</div>
@@ -77,7 +77,7 @@
     var join = document.join;
     
     function idCheck() {
-    	pop = window.open("game_idCheck.jsp?userId=" + join.userId.value, "join", "width=300, height=300");
+    	pop = window.open("game_user_idCheck.jsp?userId=" + join.userId.value, "join", "width=300, height=300");
 	}
     
     function isCheck() {
@@ -99,17 +99,17 @@
 			return;
 		}
 		if(join.UserPwd.value == "" || join.UserPwd.value == undefined || join.UserPwd.value == "null") {
-			alert("패스워드를 입력하세요!");
+			alert("비밀번호를 입력하세요!");
 			join.pwd.focus();
 			return;
 		}
 		if(join.UserPwd.value.length < 4 || join.UserPwd.value.length > 25) {
-			alert("패스워드는 4글자 이상, 25글자 이하여야 합니다!");
+			alert("비밀번호는 4글자 이상, 25글자 이하여야 합니다!");
 			join.pwd.focus();
 			return;
 		}
 		if(join.UserPwd.value != join.UserPwd2.value) {
-			alert("패스워드 입력값이 같아야 합니다!");
+			alert("비밀번호 입력값이 같아야 합니다!");
 			join.pwd2.focus();
 			return;
 		}

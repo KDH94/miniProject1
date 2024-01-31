@@ -44,8 +44,8 @@
 </body>
 <script>
     $(function(){
-        $("#game-header").load("game_header.html");
-        $("#game-footer").load("game_footer.html");
+        $("#game-header").load("game_header.jsp");
+        $("#game-footer").load("game_footer.jsp");
     });
 </script>
 </html>

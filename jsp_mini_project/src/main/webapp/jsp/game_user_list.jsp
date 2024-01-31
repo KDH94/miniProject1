@@ -3,19 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-	table, tr, th, td {
-		border : 1px solid black;
-		padding : 5px 10px;
-		border-collapse: collapse;
-		text-align: center;
-	}
-	th {
-		background-color: #eee;
-	}
-</style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="../css/mini_project_style.css">
+	<meta charset="UTF-8">
+	<title>유저 명단</title>
 </head>
 <body>
 	<%@ include file="dbconn.jsp"%>
@@ -27,14 +18,16 @@
 		String keyword = word != null ? word : "";
 		
 		if(keyword != null) {
-		sql += "WHERE USERNAME LIKE '%" + keyword + "%' OR USERID LIKE '%" + keyword +"%'"; 
+		sql += "WHERE USERNAME LIKE '%" + keyword + "%' OR USERID LIKE '%" + keyword + "%' OR EMAIL LIKE '%" + keyword + "%' AND USERLEVEL = 'U'"; 
 		}
 		ResultSet rs = stmt.executeQuery(sql);
 	%>
+	<div id="game-header"></div>
 	<!-- 	아이디	이름	이메일	돈	-->
+	<div id="container">
 	<form name="user_list">
-		<div>검색어: 
-			<input type="text" name="keyword" value="<%= keyword %>">
+		<div style="margin: 20px;"><span style="color: #fff;">검색어: </span>
+			<input type="text" name="keyword" value="<%= keyword %>" class="search-input si-alter">
 			<input type="button" value="검색" onclick="search()">
 		</div>
 		<table>
@@ -72,6 +65,9 @@
 		%>	
 		</table>
 	</form>
+	</div>
+	<br>
+	<div id="game-footer"></div>
 </body>
 <script>
 	function userUpdate(userId){
@@ -91,5 +87,9 @@
 	function search() {
 		location.href = "game_user_list.jsp?keyword=" + user.keyword.value;
 	}
+    $(function(){
+        $("#game-header").load("game_header.jsp");
+        $("#game-footer").load("game_footer.jsp");
+    });
 </script>
 </html>
