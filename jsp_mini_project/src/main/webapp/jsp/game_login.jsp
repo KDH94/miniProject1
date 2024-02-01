@@ -13,7 +13,7 @@
     <%
 		if(request.isRequestedSessionIdValid()) {
 			session.invalidate();
-		} else if(session.getAttribute("userLevel").equals("A")) {
+		} else if("A".equals(session.getAttribute("userLevel"))) {
 			response.sendRedirect("game.user.list.jsp");
 		} else {
 			response.sendRedirect("game_list.jsp");

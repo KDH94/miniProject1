@@ -11,8 +11,14 @@
 <body>
 	<%@ include file="dbconn.jsp"%>
 	<%
-		out.println(session.getAttribute("userId"));
-		out.println(session.getAttribute("userName"));
+		if("U".equals(session.getAttribute("userLevel")) || session.getAttribute("userLevel") == null) {
+	%>
+		<script>
+			alert("관리자만 들어갈 수 있습니다!");
+			location.href = "game_list.jsp";
+		</script>
+	<%
+		}
 		String sql = "SELECT * FROM KDH_GAME_USER ";
 		String word = request.getParameter("keyword");
 		String keyword = word != null ? word : "";
@@ -25,8 +31,8 @@
 	<div id="game-header"></div>
 	<!-- 	아이디	이름	이메일	돈	-->
 	<div id="container">
-	<form name="user_list">
-		<div style="margin: 20px;"><span style="color: #fff;">검색어: </span>
+	<form name="user_list" style="position: relative; left: 200px;">
+		<div style="margin: 10px 5px 20px 5px;"><span style="color: #fff;">검색어: </span>
 			<input type="text" name="keyword" value="<%= keyword %>" class="search-input si-alter">
 			<input type="button" value="검색" onclick="search()" class="btn-default btn-gh">
 		</div>
@@ -67,7 +73,6 @@
 		</table>
 	</form>
 	</div>
-	<br>
 	<div id="game-footer"></div>
 </body>
 <script>

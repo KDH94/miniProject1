@@ -92,7 +92,7 @@
 			return;
 		}
 		if(join.userPwd.value.length < 4 || join.userPwd.value.length > 25) {
-			alert("비밀번호는 4글자 이상, 25글자 이하여야 합니다! 공란으로 비우면 원래 비밀번호로 사용하게 됩니다.");
+			alert("비밀번호는 4글자 이상, 25글자 이하여야 합니다!");
 			join.userPwd.focus();
 			return;
 		}
