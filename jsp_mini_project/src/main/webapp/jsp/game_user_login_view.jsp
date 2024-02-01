@@ -32,11 +32,13 @@
             session.setAttribute("userLevel", rs.getString("USERLEVEL"));
             
             if("A".equals(rs.getString("USERLEVEL"))){
-               response.sendRedirect("game_user_list.jsp");
-            } else if(rs.getString("USERLEVEL").equals("U")) {
+            	sql = "UPDATE KDH_GAME_USER SET CNT = 0 WHERE USERID ='" + userId + "'";
+    	       	stmt.executeUpdate(sql);
+              	response.sendRedirect("game_user_list.jsp");
+            } else if("U".equals(rs.getString("USERLEVEL"))) {
 	            sql = "UPDATE KDH_GAME_USER SET "
-	                     + "CNT = 0 "
-	                     + "WHERE USERID ='" + userId + "'";
+	                + "CNT = 0 "
+	                + "WHERE USERID ='" + userId + "'";
 	            stmt.executeUpdate(sql);
 	            response.sendRedirect("game_list.jsp");
             }
@@ -48,7 +50,7 @@
            if(rsId.next()) {
               //1. 아이디가 있는데 패스워드가 다른 경우
                 int cnt = rsId.getInt("CNT");
-              if((cnt + 1) >= 5) {
+              if((cnt + 1) >= 5 && "U".equals(rs.getString("USERLEVEL"))) {
       			%>
 		      	<script>
 		      		alert("5번 이상 실패한 계정입니다. 관리자에게 문의하세요.");
@@ -64,7 +66,6 @@
 	            	location.href = "game_login.jsp";
             	</script>
             	<%
-                 out.println((cnt + 1) + "번 실패!");
                  stmt.executeUpdate(
                        "UPDATE KDH_GAME_USER SET "
                        + "CNT = CNT + 1 "
