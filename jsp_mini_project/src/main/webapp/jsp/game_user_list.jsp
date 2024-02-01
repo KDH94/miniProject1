@@ -28,7 +28,7 @@
 	<form name="user_list">
 		<div style="margin: 20px;"><span style="color: #fff;">검색어: </span>
 			<input type="text" name="keyword" value="<%= keyword %>" class="search-input si-alter">
-			<input type="button" value="검색" onclick="search()">
+			<input type="button" value="검색" onclick="search()" class="btn-default btn-gh">
 		</div>
 		<table>
 			<tr>
@@ -48,13 +48,13 @@
 				<td><%= rs.getString("USERNAME") %></td>
 				<td><%= rs.getString("EMAIL") %></td>
 				<td><%= rs.getString("MONEY") %></td>
-				<td><input type="button" onclick="userUpdate('<%= rs.getString("USERID") %>')" value="수정"></td>
-				<td><input type="button" onclick="userDelete('<%= rs.getString("USERID") %>')" value="삭제"></td>
+				<td><input type="button" onclick="userUpdate('<%= rs.getString("USERID") %>')" value="수정" class="btn-default btn-gh"></td>
+				<td><input type="button" onclick="userDelete('<%= rs.getString("USERID") %>')" value="삭제" class="btn-default btn-gh"></td>
 				<td>
 				<%
 					if(rs.getInt("CNT") >= 4) {
 				%>
-					<input type="button" onclick="userInit('<%= rs.getString("USERID") %>')" value="초기화">
+					<input type="button" onclick="userInit('<%= rs.getString("USERID") %>')" value="초기화" class="btn-default btn-gh">
 				<%	
 					}
 				%>
@@ -62,6 +62,7 @@
 			</tr>	
 		<%
 			}
+			conn.close();
 		%>	
 		</table>
 	</form>
@@ -71,11 +72,11 @@
 </body>
 <script>
 	function userUpdate(userId){
-		location.href="user_update.jsp?userId=" + userId;
+		location.href="game_user_update.jsp?userId=" + userId;
 	}
 	function userDelete(userId) {
 		if(confirm("정말 삭제하시겠습니까?")) {
-			location.href="user_delete.jsp?userId=" + userId;
+			location.href="game_user_delete.jsp?userId=" + userId;
 		} else {
 			return;
 		}

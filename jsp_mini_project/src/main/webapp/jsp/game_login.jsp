@@ -10,8 +10,17 @@
     <title>로그인</title>
 </head>
 <body>
+    <%
+		if(request.isRequestedSessionIdValid()) {
+			session.invalidate();
+		} else if(session.getAttribute("userLevel").equals("A")) {
+			response.sendRedirect("game.user.list.jsp");
+		} else {
+			response.sendRedirect("game_list.jsp");
+		}
+    %>
     <div id="game-header"></div>
-    <form action="">
+    <form action="game_user_login_view.jsp" name="login" method="post">
         <div class="container-login">
             <fieldset>
                 <legend>로그인</legend>
@@ -29,13 +38,11 @@
                         </div>
                     </li>
                     <div>
-                        <input type="button" value="로그인" name="login" class="login-button">
+                        <input type="submit" value="로그인" class="login-btn">
                     </div>
                 </ul>
             </fieldset>
             <ul>
-                <a href="#" class="login-subButton">비밀번호 찾기</a>
-                <span class="just-divide">|</span>
                 <a href="game_join.jsp" class="login-subButton">회원가입</a>
             </ul>
         </div>

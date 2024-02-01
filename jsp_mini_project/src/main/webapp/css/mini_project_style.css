@@ -2,6 +2,14 @@ body {
     background-color: rgb(27, 40, 56);
 }
 
+#container {
+    width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .container-login {
     background-color: rgb(27, 40, 56);
     width: 480px;
@@ -16,11 +24,6 @@ body {
     height: 480px;
 }
 
-#container {
-    width: 1080px;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 fieldset {
     margin-top: 34px;
@@ -142,8 +145,7 @@ ul li div {
     padding-bottom: 80px;
 }
 
-.main-logo,
-.main-logo a {
+.main-logo, .main-logo a {
     font-size: 50px;
     text-decoration: none;
     width: 100px;
@@ -261,6 +263,7 @@ table, tr, th, td {
 	border-collapse: collapse;
 	text-align: center;
 }
+
 th {
 	background-color: rgb(122, 130, 139);
 }
@@ -269,4 +272,20 @@ th {
 	float: none;
 	border-radius: 10px;
 	
+}
+
+.search {
+	margin-bottom: 10px;
+	color: #fff;
+}
+
+.right-sorting {
+	margin: 10px;
+	float:right;
+}
+
+.text-alter {
+	color: #fff;
+	font-weight: bold;
+	margin: 10px;
 }
