@@ -47,16 +47,12 @@
     <div id="game-header"></div>
 	<div id="container">
 		<form name="game_list">
-<%-- 			<div class="search">검색어:
-				<input type="text" name="keyword" id="keyword" value="<%= keyword %>" class="search-input si-alter">
-				<input type="submit" value="검색" onclick="search()" class="btn-default btn-gh" id="searchGame">
-			</div> --%>
 			<table border="1">
 				<tr>
 					<th style="width: 7%">번호</th>
 					<th style="width: 30%">게임명</th>
 					<th style="width: 35%">이미지</th>
-					<th style="width: 10%">원가(원)</th>
+					<th style="width: 10%">정상가(원)</th>
 					<th style="width: 10%">할인율(%)</th>
 					<th style="width: 12%">할인가(원)</th>
 				</tr>
@@ -69,7 +65,9 @@
 						<a href="game_view.jsp?boardNo=<%= rs.getString("BOARDNO") %>"><%= rs.getString("GAMENAME2") %></a>
 					</td>
 					<td>
-						<a href="game_view.jsp?boardNo=<%= rs.getString("BOARDNO") %>"><%= rs.getString("IMAGE") %></a>
+						<a href="game_view.jsp?boardNo=<%= rs.getString("BOARDNO") %>">
+							<img src="../img/<%= rs.getString("IMAGE") %>" class="img-size">
+						</a>
 					</td>
 					<td><%= rs.getString("PRICE") %></td>
 					<td><%= rs.getString("DC_RATE") %></td>
@@ -87,7 +85,7 @@
 						<input type="submit" value="게임 등록" formaction="game_add.jsp" class="btn-default btn-gh">
 						<input type="submit" value="게임 삭제" formaction="game_remove.jsp" class="btn-default btn-gh">
 					</div>
-					<div style="clear: both;"></div>
+					<div class="f-clear"></div>
 			<%		
 				}
 			%>
@@ -105,9 +103,5 @@
         $("#game-header").load("game_header.jsp");
         $("#game-footer").load("game_footer.jsp");
     });
-/* 	function search() {
-		var board = document.game_list;
-		location.href = "game_list.jsp?keyword=" + board.keyword.value;
-	} */
 </script>
 </html>

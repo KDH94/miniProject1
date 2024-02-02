@@ -20,7 +20,7 @@
 		}
     %>
     <div id="game-header"></div>
-    <form action="game_user_login_view.jsp" name="login" method="post">
+    <form name="login" method="post">
         <div class="container-login">
             <fieldset>
                 <legend>로그인</legend>
@@ -38,7 +38,8 @@
                         </div>
                     </li>
                     <div>
-                        <input type="submit" value="로그인" class="login-btn">
+                        <input type="button" value="로그인" class="login-btn">
+                        <!-- ↑타입을 버튼으로 바꾸고 onclick 이벤트 줘야 함 -->
                     </div>
                 </ul>
             </fieldset>

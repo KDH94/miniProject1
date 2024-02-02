@@ -4,25 +4,22 @@
 <html lang="en">
 <head>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <link rel="stylesheet" href="../css/mini_project_style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게임 판매 게시판</title>
 </head>
 <body>
-	<%
-		String keyword = "";
-	%>
+	
     <div id="container">
-		<form name="search_form">
+		<form name="search_form" action="game_list.jsp">
 	        <header id="gh-header" class="gh-header">
 	            <div class="main-logo">
 	                <a href="game_list.jsp">🎮</a>
 	            </div>
 	            <div>
 	                    <div>
-	                        <input type="text" class="search-input" name="keyword" value="<%= keyword %>">
-	                        <input type="submit" class="search-input search-btn" value="🔍" onclick="search()">
+	                        <input type="text" class="search-input" name="keyword"  id="keyword">
+	                        <input type="button" id="search1" class="search-input search-btn" value="🔍" onclick="search()">
 	                    </div>
 	            </div>
 	            <div class="head-login">
@@ -38,7 +35,7 @@
 	            <% 
 	            	}
 	            %>
-	                <input type="button" class="btn-default btn-cart" value="🛒" onclick="isLogin(<%= session.getAttribute("userId") %>)">
+	                <input type="button" class="btn-default btn-cart" value="🛒" onclick="isLogin('<%= session.getAttribute("userId") %>')">
 	            </div>
 	        </header>
 	        <ul class="menu">
@@ -64,10 +61,21 @@
     </div>
 </body>
 <script type="text/javascript">
-	function search() {
+
+ 	 function search() {
 		var board = document.search_form;
 		location.href = "game_list.jsp?keyword=" + board.keyword.value;
 	}
+ 	 
+ 	/*
+ 	$(function(){
+ 		$("#keyword").keydown(function(e) {
+ 			if(e.keyCode === 13) {
+ 				search();
+ 			}
+ 		}); 		
+ 	}) */
+	
 	function isLogin(userId) {
 		if(userId == null) {
 			alert("로그인 후 사용하실 수 있습니다!");

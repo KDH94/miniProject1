@@ -15,7 +15,7 @@
 	String sql = "SELECT USERID, USERNAME, "
 			+ "SUBSTR(EMAIL, 1, INSTR(EMAIL, '@')-1) AS EMAIL, "
 			+ "SUBSTR(EMAIL, INSTR(EMAIL, '@')+1) AS EMAIL2 "
-			+ "FROM KDH_GAME_USER " + "WHERE USERID = '" + userId + "'";
+			+ "FROM KDH_GAME_USER WHERE USERID = '" + userId + "'";
 
 	ResultSet rs = stmt.executeQuery(sql);
 	rs.next();

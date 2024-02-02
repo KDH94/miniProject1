@@ -77,7 +77,7 @@
 			%>
 		      	<script>
 		      		alert("없는 아이디입니다. 다시 한번 확인해 주세요.");
-		      		location.href = "game_login.jsp";
+		      		 location.href = "game_login.jsp"; 
 		      	</script>
 		    <%
            }
