@@ -345,3 +345,13 @@ th {
 	
 	font-size: 20px;
 }
+
+td a {
+	color : #fff;
+	font-weight: bold;
+	text-decoration : none;
+}
+
+td a:hover {
+	color : #aaa;
+}

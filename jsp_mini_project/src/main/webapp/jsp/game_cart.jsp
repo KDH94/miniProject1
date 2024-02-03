@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="../css/mini_project_style.css">
 	<meta charset="UTF-8">
 	<title>장바구니</title>
+<style>
+	td a {
+		color : #fff;
+		font-weight: bold;
+		text-decoration : none;
+	}
+	td a:hover {
+		color : #aaa;
+	}
+</style>
 </head>
 <body>
 	<%@ include file="dbconn.jsp" %>
@@ -21,11 +31,12 @@
 			</script>
 			<%
 		}
-		String sql = "SELECT IMAGE, "
+		String sql = "SELECT IMAGE, BOARDNO, "
 				+ "SUBSTR(GAMENAME, 1, INSTR(GAMENAME, '/')-1) AS GAMENAME, " 
 				+ "PRICE, (DISCOUNTRATE * 100) AS DCRATE, (PRICE * (1- DISCOUNTRATE)) AS PRICE_DC "
 				+ "FROM KDH_GAME_CART C "
-				+ "INNER JOIN KDH_GAME_PRODUCT G ON C.ITEMNO = G.ITEMNO "
+				+ "INNER JOIN KDH_GAME_PRODUCT P ON C.ITEMNO = P.ITEMNO "
+				+ "INNER JOIN KDH_GAME_BOARD B ON C.ITEMNO = B.ITEMNO "
 				+ "WHERE USERID = '" + userId + "'";
 		ResultSet rs = stmt.executeQuery(sql);
 	%>
@@ -43,37 +54,29 @@
 				</tr>
 				<tr>
 				<%
-					if(!rs.next()) {
-				%>
-					<td colspan="6">장바구니가 비었습니다.<td>
-				<%
-					} else{
-				rs=stmt.executeQuery(sql);
 					int sum_price = 0;
 					while(rs.next()) {
 				%>
 					<td style="width: 50px"><input type="checkbox"></td>
-					<td style="width: 150px"><%= rs.getString("IMAGE") %></td>
+					<td style="width: 150px"><img src="../img/<%= rs.getString("IMAGE") %>" class="img-size" style="width: 50%; height: 50%;"></td>
 					<td>
-						<%= rs.getString("GAMENAME") %>
 						<a href="game_view.jsp?boardNo=<%= rs.getString("BOARDNO") %>"><%= rs.getString("GAMENAME") %></a>
 					</td>
 					<td><%= rs.getString("PRICE") %>원</td>
 					<td><%= rs.getString("DCRATE") %>%</td>
 					<td><%= rs.getString("PRICE_DC") %>원</td>
 				<%
-					sum_price =+ rs.getInt("PRICE_DC");
+					sum_price += rs.getInt("PRICE_DC");
 					}
-					
 				%>
 				</tr>
 				<tr>
-					<td colspan="5">합계: </td>
+					<td><input type="button" name="selectDelete" value="선택 삭제"></td>
+					<td colspan="4" style="text-align: left;">합계: </td>
 					<td><%= sum_price %>원</td>
 				</tr>
 			</table>
 			<input type="button" name="order" value="주문하기">
-			<%} %>
 		</form>
 	</div>
 	<div id="game-footer"></div>

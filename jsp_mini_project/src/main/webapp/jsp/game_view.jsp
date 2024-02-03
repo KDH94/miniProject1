@@ -12,7 +12,7 @@
 <%@ include file="dbconn.jsp" %>
 <%
 	String boardNo = request.getParameter("boardNo");
-	String sql = "SELECT IMAGE, PRICE, VIDEO, "
+	String sql = "SELECT IMAGE, PRICE, VIDEO, P.ITEMNO, "
 			+ "(PRICE * (1- DISCOUNTRATE)) AS PRICE_DC, TO_CHAR(P.CDATETIME, 'YYYY-MM-DD') AS DATE_R, "
 			+ "SUBSTR(CONTENTS, 1, INSTR(CONTENTS, '社')-1) AS DEVELOPER "
 			+ "FROM KDH_GAME_PRODUCT P "
@@ -24,11 +24,15 @@
 	<div id="game-header"></div>
 	<div id="container">
 		<div class="conBox left">
+		<!-- 영상 나오는 박스 -->
 		    <div style="margin: 10px;">
-		    	<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= rs.getString("VIDEO") %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+		    	<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= rs.getString("VIDEO") %>" frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+				</iframe>
     		</div>
 		</div>
 		<div class="conBox right">
+		<!-- 게임 이미지, 가격, 장바구니 -->
 			<img src="../img/<%= rs.getString("IMAGE") %>" class="img-size" style="margin: 10px">
 			<div class="underLine"></div>
 			<div class="text-alter">정상가 <span class="price-og"><%= rs.getString("PRICE") %>원</span></div>
@@ -37,9 +41,13 @@
 			<div class="text-alter">출시일 <span><%= rs.getString("DATE_R") %></span></div>
 			<div class="text-alter">개발사 <span><%= rs.getString("DEVELOPER") %></span></div>
 			<div class="underLine"></div>
-			<div><input type="button" value="장바구니" class="cart-btn text-alter" style="margin: 32px 0px 0px 41px" onclick="isLogin(<%= session.getAttribute("userId") %>)"></div>
+			<div>
+				<input type="button" value="장바구니" class="cart-btn text-alter" style="margin: 32px 0px 0px 41px"
+					onclick="isTake('<%= session.getAttribute("userId") %>', <%= rs.getString("ITEMNO") %>)">
+			</div>
 		</div>
 		<div class="conBox left">
+		<!-- 요구사항과 간단한 게임 소개 -->
 			<div class="text-alter">요구사항과 간단한 게임 정보</div>
 			<fieldset>
 				<legend>요구사항</legend>
@@ -57,12 +65,16 @@
 	    $("#game-footer").load("game_footer.jsp");
 	});
 	
-	function isLogin(userId) {
+	function isTake(userId, itemNo) {
 		if(userId == null) {
 			alert("로그인 후 사용하실 수 있습니다!");
 			return;
 		} else {
-			location.href = "game_cart.jsp?userId=" + userId;
+			if(confirm("장바구니에 담을까요?")) {
+				location.href = "game_cart_view.jsp?userId=" + userId + "&itemNo=" + itemNo;
+			} else {
+				return;
+			}
 		}
 	}
 </script>

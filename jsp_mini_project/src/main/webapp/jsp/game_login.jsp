@@ -20,7 +20,7 @@
 		}
     %>
     <div id="game-header"></div>
-    <form name="login" method="post">
+    <form name="login" action="game_user_login_view.jsp" method="post">
         <div class="container-login">
             <fieldset>
                 <legend>로그인</legend>
@@ -28,18 +28,18 @@
                     <li>
                         <div>아이디</div>
                         <div>
-                            <input type="text" id="userId" name="userId" class="login-input" autofocus>
+                            <input type="text" id="userId" name="userId" class="login-input" required autofocus>
                         </div>
                     </li>
                     <li>
                         <div>비밀번호</div>
                         <div>
-                            <input type="password" id="userPwd" name="userPwd" class="login-input">
+                            <input type="password" id="userPwd" name="userPwd" class="login-input" required>
                         </div>
                     </li>
                     <div>
-                        <input type="button" value="로그인" class="login-btn">
-                        <!-- ↑타입을 버튼으로 바꾸고 onclick 이벤트 줘야 함 -->
+                        <input type="submit" value="로그인" class="login-btn">
+                        <!-- ↑타입을 버튼으로 바꾸고 onclick 이벤트 주는 것도 좋음 -->
                     </div>
                 </ul>
             </fieldset>

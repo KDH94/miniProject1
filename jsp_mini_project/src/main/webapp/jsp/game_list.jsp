@@ -9,16 +9,13 @@
 	<meta charset="UTF-8">
 	<title>게임 리스트</title>
 <style>
-	a{
+	td a {
 		color : #fff;
 		font-weight: bold;
 		text-decoration : none;
 	}
-	a:visited {
-		color : #eee;
-	}
-	a:hover {
-		color : blue;
+	td a:hover {
+		color : #aaa;
 	}
 </style>
 </head>
@@ -47,7 +44,7 @@
     <div id="game-header"></div>
 	<div id="container">
 		<form name="game_list">
-			<table border="1">
+			<table>
 				<tr>
 					<th style="width: 7%">번호</th>
 					<th style="width: 30%">게임명</th>
@@ -94,7 +91,7 @@
     <div id="game-footer"></div>
 </body>
 <script type="text/javascript">
-	$("input[type='submit']").keydown(function() {
+	$("input[type='submit']").keydown(function(e) {
 		if(e.keyCode === 13) {
 				e.preventDefault();
 		}

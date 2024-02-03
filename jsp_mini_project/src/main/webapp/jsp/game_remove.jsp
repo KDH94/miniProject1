@@ -17,6 +17,6 @@
 </body>
 <script>
 	alert("등록된 게임이 삭제되었습니다!");
-	location.href="board_list.jsp";
+	location.href="game_list.jsp";
 </script>
 </html>

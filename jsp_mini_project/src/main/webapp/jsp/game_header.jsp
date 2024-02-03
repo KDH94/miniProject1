@@ -28,11 +28,17 @@
 	            %>
 		                <a href="game_login.jsp" class="btn-default btn-gh">로그인</a>
 		                <a href="game_join.jsp" class="btn-default btn-gh">회원가입</a>
-	            <%		
+	            <%
 	            	} else {
 	            %>
 		                <a href="game_login.jsp" class="btn-default btn-gh">로그아웃</a>
-	            <% 
+		                <a href="game_user_update.jsp?userId=<%= session.getAttribute("userId") %>" class="btn-default btn-gh">정보수정</a>
+	            <%
+	            		if("A".equals(session.getAttribute("userLevel"))) {
+	            %>
+		            		<a href="game_user_list.jsp" class="btn-default btn-gh">회원관리</a>
+	            <%
+	            		}
 	            	}
 	            %>
 	                <input type="button" class="btn-default btn-cart" value="🛒" onclick="isLogin('<%= session.getAttribute("userId") %>')">
@@ -61,7 +67,6 @@
     </div>
 </body>
 <script type="text/javascript">
-
  	 function search() {
 		var board = document.search_form;
 		location.href = "game_list.jsp?keyword=" + board.keyword.value;

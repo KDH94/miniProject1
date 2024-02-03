@@ -62,7 +62,7 @@
             	<input value="<%= cnt+1 %>" hidden>
             	<script>
 	            	var cnt = "<%= cnt+1 %>";
-	            	alert(cnt+"번 로그인 실패!");
+	            	alert(cnt+"번 로그인 실패! 5번 틀리면 로그인이 불가합니다!");
 	            	location.href = "game_login.jsp";
             	</script>
             	<%
