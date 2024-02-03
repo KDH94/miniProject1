@@ -254,14 +254,14 @@ li:hover .submenu {
 }
 
 table, tr, th, td {
-	border : 2px solid #ccc;
+	border : 2px solid rgb(50, 62, 76);
 	padding : 5px 10px;
 	border-collapse: collapse;
 	text-align: center;
 }
 
 th {
-	background-color: rgb(122, 130, 139);
+	background-color: rgb(39, 51, 66);
 }
 
 .si-alter {
@@ -332,6 +332,7 @@ th {
 
 .underLine {
 	border-bottom: 2px solid rgb(50, 62, 76);
+	margin-bottom: 10px;
 }
 
 .price-og {
@@ -354,4 +355,16 @@ td a {
 
 td a:hover {
 	color : #aaa;
+}
+
+.user-out {
+	background-color: #333;
+	color: #c00;
+	padding: 5px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.user-out:hover {
+	color: #f00;
+	font-weight: bold;
 }

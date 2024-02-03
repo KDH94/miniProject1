@@ -22,7 +22,7 @@
 	%>
     <div id="game-header"></div>
     <form name="join" action="game_join_save.jsp">
-        <div class="container-login container-join">
+		<div class="container-login container-join">
             <fieldset>
                 <legend>회원 정보 수정</legend>
                 <ul>
@@ -66,15 +66,22 @@
                         </span>
                     </li>
                     <div class="text-center">
-                        <input type="button" value="수정하기" name="login" class="login-btn join-btn" onclick="isCheck()">
-                        <input type="button" value="취소하기" name="login" class="login-btn join-btn join-cancel" onclick="goHome()">
+                        <input type="button" value="수정하기" name="userUpdate" class="login-btn join-btn" onclick="fnCheck()">
+                        <input type="button" value="취소하기" name="isBack" class="login-btn join-btn join-cancel" onclick="history.back()">
                     </div>
                 </ul>
             </fieldset>
             <div class="caution text-center">
                 <strong>※ 아이디는 주문 및 결제 시 필요한 고유 정보로, 수정이 불가합니다!</strong>
+			<%
+				if("U".equals(session.getAttribute("userLevel"))) {
+			%>
+				<input type="button" value="회원 탈퇴" class="user-out" onclick="userOut('<%=rs.getString("USERID")%>')">
+			<%
+				}
+			%>
             </div>
-        </div>
+		</div>
     </form>
     <div id="game-footer"></div>
 </body>
@@ -84,7 +91,7 @@
 	    $("#game-footer").load("game_footer.jsp");
 	});
 	
-    function isCheck() {
+    function fnCheck() {
     	const regType = /^[a-zA-Z0-9]*$/g;
     	if (!regType.test(join.userPwd.value)) {
 			alert("비밀번호는 영어와 숫자로만 조합해야 합니다!");
@@ -123,8 +130,12 @@
 		document.join.email2.value = email;
 	}
     
-    function goHome() {
-		location.href = "game_user_list.jsp";
+    function userOut(userId) {
+		if(confirm("정말 탈퇴하시겠습니까?")) {
+			location.href = "game_user_delete.jsp?userId=" + userId;
+		} else {
+			return;
+		}
 	}
 </script>
 </html>

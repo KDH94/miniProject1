@@ -9,27 +9,39 @@
 <body>
 	<%@ include file="dbconn.jsp"%>
 	<%
-	request.setCharacterEncoding("UTF-8");
-	String id = request.getParameter("id");
-
-	ResultSet rs = stmt.executeQuery("SELECT * FROM KDH_GAME_USER WHERE USERID = '" + id + "'");
+	String userId = request.getParameter("userId");
+	ResultSet rs = stmt.executeQuery("SELECT * FROM KDH_GAME_USER WHERE USERID = '" + userId + "'");
 	if(rs.next()) {
-		if(rs.getString("USERID").equals(id)) {
-			String sql = "DELETE FROM KDH_GAME_USER WHERE USERID = '" + id + "'";
+		if(rs.getString("USERID").equals(userId)) {
+			String sql = "DELETE FROM KDH_GAME_USER WHERE USERID = '" + userId + "'";
 			int cnt = stmt.executeUpdate(sql);
 			if(cnt > 0) {
-				out.println("아이디가" + id + "인 회원의 정보가 삭제됐습니다!");
+				if(request.isRequestedSessionIdValid() && "U".equals(session.getAttribute("userLevel"))) {
+					session.invalidate();
+				%>
+					<script>
+					alert("탈퇴되었습니다!");
+					location.href = "game_list.jsp";
+					</script>
+				<%
+				}
 			} else {
-				out.println("다시 시도해 주세요!");
+				%>
+					<script>
+					alert("다시 시도해 주세요!");
+					location.href = "game_list.jsp";
+					</script>
+				<%
 			}
 		}
 	} else {
-		out.println(id + "은(는) 존재하지 않는 아이디입니다!");
+		%>
+			<script>
+			alert("존재하지 않는 아이디입니다!");
+			location.href = "game_list.jsp";
+			</script>
+		<%
 	}
 	%>
 </body>
-<!-- <script type="text/javascript">
-	alert("유저가 삭제되었습니다!");
-	location.href = "game_user_list.jsp";
-</script> -->
 </html>

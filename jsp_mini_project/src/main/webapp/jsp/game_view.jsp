@@ -71,7 +71,7 @@
 			return;
 		} else {
 			if(confirm("장바구니에 담을까요?")) {
-				location.href = "game_cart_view.jsp?userId=" + userId + "&itemNo=" + itemNo;
+				location.href = "game_cart_save.jsp?userId=" + userId + "&itemNo=" + itemNo;
 			} else {
 				return;
 			}

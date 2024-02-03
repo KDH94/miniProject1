@@ -48,6 +48,7 @@
 			</tr>
 		<%
 			while(rs.next()){
+				if("U".equals(rs.getString("USERLEVEL"))) {
 		%>	
 			<tr>
 				<td><%= rs.getString("USERID") %></td>
@@ -67,6 +68,7 @@
 				</td>
 			</tr>	
 		<%
+				}
 			}
 			conn.close();
 		%>	
@@ -87,11 +89,7 @@
 		}
 	}
 	function userInit(userId) {
-		location.href="user_login_init.jsp?userId=" + userId;
-	}
-	var user = document.user_list;
-	function search() {
-		location.href = "game_user_list.jsp?keyword=" + user.keyword.value;
+		location.href="game_user_login_init.jsp?userId=" + userId;
 	}
     $(function(){
         $("#game-header").load("game_header.jsp");

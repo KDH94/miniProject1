@@ -26,7 +26,8 @@
 			= "UPDATE KDH_GAME_USER SET "
 			+ pwdStr
 			+ "USERNAME = '" + userName + "', "
-			+ "EMAIL = '" + email + "' "
+			+ "EMAIL = '" + email + "', "
+			+ "UDATETIME = SYSDATE "
 			+ "WHERE USERID = '" + userId + "'";
 		stmt.executeUpdate(sql);
 	%>

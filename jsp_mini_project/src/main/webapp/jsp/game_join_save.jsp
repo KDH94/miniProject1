@@ -31,7 +31,7 @@
 </body>
 <script type="text/javascript">
 	var userName = document.userName.userName.value;
-	alert(userName + " 회원님, 가입을 환영합니다!\n 로그인 후 사이트 이용 바랍니다.")
+	alert(userName + " 회원님, 가입을 환영합니다!\n로그인 후 사이트 이용 바랍니다.")
 	location.href = "game_list.jsp";
 </script>
 </html>
