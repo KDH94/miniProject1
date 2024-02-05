@@ -13,7 +13,7 @@
 <body>
 	<div id="game-header"></div>
 	<form name="game_insert" method="post" enctype="multipart/form-data">
-		<div class="container-login container-join">
+		<div class="container-login container-join" style="height: 800px">
 		<fieldset>
 	        <legend>게임 등록</legend>
 	        <ul>
@@ -79,7 +79,7 @@
 	            <li>
 	                <div class="join-divide">내용</div>
 	                <span>
-	                    <textarea rows="15" cols="60" name="contents" required
+	                    <textarea rows="10" cols="80" name="contents" required
 							placeholder="※작성법: 처음엔 '...社에서 만든~'으로 작성. 여기서 ...엔 회사명을 입력할 것."></textarea>
 	                </span>
 	            </li>

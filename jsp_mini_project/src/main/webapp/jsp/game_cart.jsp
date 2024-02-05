@@ -37,9 +37,9 @@
 			</script>
 			<%
 		}
-		String sql = "SELECT IMAGE, BOARDNO, CARTNO, "
+		String sql = "SELECT IMAGE, BOARDNO, CARTNO, PRICE, "
 				+ "SUBSTR(GAMENAME, 1, INSTR(GAMENAME, '/')-1) AS GAMENAME, " 
-				+ "PRICE, (DISCOUNTRATE * 100) AS DCRATE, (PRICE * (1- DISCOUNTRATE)) AS PRICE_DC "
+				+ "(DISCOUNTRATE * 100) AS DCRATE, (PRICE * (1- DISCOUNTRATE)) AS PRICE_DC "
 				+ "FROM KDH_GAME_CART C "
 				+ "INNER JOIN KDH_GAME_PRODUCT P ON C.ITEMNO = P.ITEMNO "
 				+ "INNER JOIN KDH_GAME_BOARD B ON C.ITEMNO = B.ITEMNO "
@@ -79,12 +79,14 @@
 					}
 				%>
 				<tr>
-					<td><input type="button" name="selectDelete" value="선택 삭제" onclick="fnDelete()"></td>
+					<td><input type="button" name="selectDelete" value="선택 삭제" onclick="fnBtn('delete')"></td>
 					<td colspan="4" style="text-align: left;">합계: </td>
 					<td><%= sum_price %>원</td>
 				</tr>
 			</table>
-			<input type="button" name="order" value="주문하기" class="login-btn join-btn" style="float: right; margin-top: 10px;">
+			<input name="sumPrice" value="<%= sum_price %>" hidden>
+			<input type="button" name="order" value="구매하기" class="login-btn join-btn"
+				style="float: right; margin-top: 10px;" onclick="fnBtn('buy')">
 		</form>
 	</div>
 	<div class="f-clear"></div>
@@ -115,10 +117,25 @@
 	    });
 	});
 
-	function fnDelete() {
-		var form = document.game_cart;
-		form.action = "game_cart_delete.jsp";
-		form.submit();
+	var form = document.game_cart;
+	function fnBtn(txt) {
+		if($("input[name=check]").is(":checked")) {
+			if(txt == "delete") {
+				form.action = "game_cart_delete.jsp";
+				form.submit();
+			} else if(txt == "buy") {
+				if(confirm("정말 구매하시겠습니까?")) {
+					var sumPrice = form.sumPrice.value;
+					form.action = "game_cart_buy.jsp?sumPrice=" + sumPrice;
+					form.submit();
+				} else {
+					return;
+				}
+			}
+		} else {
+			alert("삭제 또는 구매할 상품은 체크해 주세요!");
+			return;
+		}
 	}
 </script>
 </html>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>선택한 장바구니 삭제</title>
 </head>
 <body>
 	<%@ include file="dbconn.jsp" %>
@@ -12,13 +12,18 @@
 		String cartNo[] = request.getParameterValues("check");
 		String sql = "DELETE FROM KDH_GAME_CART WHERE CARTNO IN(";	
 		for(int i=0; i<cartNo.length; i++){
-			sql += cartNo[i];
-			if(i != cartNo.length-1){
-				sql += ",";
+			if(!"on".equals(cartNo[i])) {
+				sql += cartNo[i];
+				if(i != cartNo.length-1){
+					sql += ",";
+				}
 			}
 		}
 		sql += ")";
-		out.println(sql);
+		stmt.executeUpdate(sql);
 	%>
 </body>
+<script>
+	location.href = "game_cart.jsp?userId=" + "<%= session.getAttribute("userId") %>";
+</script>
 </html>

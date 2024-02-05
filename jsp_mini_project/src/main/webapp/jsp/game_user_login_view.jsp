@@ -30,6 +30,7 @@
             session.setAttribute("userId", rs.getString("USERID"));
             session.setAttribute("userName", rs.getString("USERNAME"));
             session.setAttribute("userLevel", rs.getString("USERLEVEL"));
+            session.setAttribute("money", rs.getString("MONEY"));
             
             if("A".equals(rs.getString("USERLEVEL"))){
             	sql = "UPDATE KDH_GAME_USER SET CNT = 0 WHERE USERID ='" + userId + "'";

@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="../css/mini_project_style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>게임 판매 게시판</title>
@@ -33,15 +34,27 @@
 	            %>
 		                <a href="game_login.jsp" class="btn-default btn-gh">로그아웃</a>
 		                <a href="game_user_update.jsp?userId=<%= session.getAttribute("userId") %>" class="btn-default btn-gh">정보수정</a>
-	            <%
+	            	<%
 	            		if("A".equals(session.getAttribute("userLevel"))) {
-	            %>
+	            	%>
 		            		<a href="game_user_list.jsp" class="btn-default btn-gh">회원관리</a>
-	            <%
+	            	<%
 	            		}
 	            	}
+	            	if(!"A".equals(session.getAttribute("userLevel"))) {
 	            %>
 	                <input type="button" class="btn-default btn-cart" value="🛒" onclick="isLogin('<%= session.getAttribute("userId") %>')">
+	            <%
+	            	}
+	            	if("U".equals(session.getAttribute("userLevel"))) {
+	            %>
+	                <div style="color: #fff;">현재 금액:
+						<span style="color: rgb(239, 165, 60); font-weight: bold;">
+							<%= session.getAttribute("money") %></span>원
+					</div>
+				<%
+	            	}
+				%>
 	            </div>
 	        </header>
 	        <ul class="menu">

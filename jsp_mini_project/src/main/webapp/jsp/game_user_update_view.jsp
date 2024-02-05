@@ -16,15 +16,21 @@
 		String email_f = request.getParameter("email");
 		String email_b = request.getParameter("email2");
 		String email = email_f + email_b;
+		String money = request.getParameter("money");
 		
 		String pwdStr = "";
 		if(userPwd != null && !userPwd.equals("")) {
-			pwdStr = "USERPWD = '" + userPwd + "',";
+			pwdStr = "USERPWD = '" + userPwd + "', ";
+		}
+		String addMoney = "";
+		if(money != null && !money.equals("")) {
+			addMoney = "MONEY = (MONEY + " + money + "), ";
 		}
 		
 		String sql 
 			= "UPDATE KDH_GAME_USER SET "
 			+ pwdStr
+			+ addMoney
 			+ "USERNAME = '" + userName + "', "
 			+ "EMAIL = '" + email + "', "
 			+ "UDATETIME = SYSDATE "

@@ -8,16 +8,17 @@
 </head>
 <body>
 	<form name="cartIn">
-<%@ include file="dbconn.jsp" %>
-<%
-	String userId = request.getParameter("userId");
-	String itemNo = request.getParameter("itemNo");
-
-	String sql = "INSERT INTO KDH_GAME_CART VALUES (KDH_CART_SEQ.NEXTVAL, '"
-			+ userId + "', " + itemNo + ", SYSDATE)";
-/* 	stmt.executeUpdate(sql); */
-%>
-	<input name="userId" value="<%= userId %>" hidden>	
+	<%@ include file="dbconn.jsp" %>
+	<%
+		String userId = request.getParameter("userId");
+		String itemNo = request.getParameter("itemNo");
+	
+		String sql = "INSERT INTO KDH_GAME_CART VALUES ('3', '"
+				+ userId + "', " + itemNo + ", SYSDATE)";
+	 	stmt.executeUpdate(sql);
+		//out.println(sql);
+	%>	
+		<input name="userId" value="<%= userId %>" hidden>	
 	</form>
 </body>
 <script>

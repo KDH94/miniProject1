@@ -12,7 +12,7 @@
 	<%@ include file="dbconn.jsp"%>
 	<%
 	String userId = request.getParameter("userId");
-	String sql = "SELECT USERID, USERNAME, "
+	String sql = "SELECT USERID, USERNAME, MONEY, "
 			+ "SUBSTR(EMAIL, 1, INSTR(EMAIL, '@')-1) AS EMAIL, "
 			+ "SUBSTR(EMAIL, INSTR(EMAIL, '@')+1) AS EMAIL2 "
 			+ "FROM KDH_GAME_USER WHERE USERID = '" + userId + "'";
@@ -21,7 +21,7 @@
 	rs.next();
 	%>
     <div id="game-header"></div>
-    <form name="join" action="game_join_save.jsp">
+    <form name="join" action="game_user_update.jsp">
 		<div class="container-login container-join">
             <fieldset>
                 <legend>회원 정보 수정</legend>
@@ -65,11 +65,24 @@
                             <input type="text" name="userName" class="join-input" required placeholder="이름을 입력하세요" value="<%=rs.getString("USERNAME")%>">
                         </span>
                     </li>
+                    <%
+                    	if("A".equals(session.getAttribute("userLevel"))) {
+                    %>
+                    <li>
+                        <div class="join-divide">추가 금액</div>
+                        <span>
+                            <input type="text" name="money" class="join-input" placeholder="추가할 액수를 입력하세요">
+                            <span style="color: #fff">현재 금액: <span style="color: rgb(239, 165, 60);"><%=rs.getString("MONEY")%></span>원</span>
+                        </span>
+                    </li>
+                    <%
+                    	}
+                    %>
+                </ul>
                     <div class="text-center">
                         <input type="button" value="수정하기" name="userUpdate" class="login-btn join-btn" onclick="fnCheck()">
                         <input type="button" value="취소하기" name="isBack" class="login-btn join-btn join-cancel" onclick="history.back()">
                     </div>
-                </ul>
             </fieldset>
             <div class="caution text-center">
                 <strong>※ 아이디는 주문 및 결제 시 필요한 고유 정보로, 수정이 불가합니다!</strong>
@@ -92,17 +105,20 @@
 	});
 	
     function fnCheck() {
+    	var join = document.join;
     	const regType = /^[a-zA-Z0-9]*$/g;
     	if (!regType.test(join.userPwd.value)) {
 			alert("비밀번호는 영어와 숫자로만 조합해야 합니다!");
 			join.userId.focus();
 			return;
 		}
-		if(join.userPwd.value.length < 4 || join.userPwd.value.length > 25) {
-			alert("비밀번호는 4글자 이상, 25글자 이하여야 합니다!");
-			join.userPwd.focus();
-			return;
-		}
+    	if(join.userPwd.value.length != 0) {
+			if(join.userPwd.value.length < 4 || join.userPwd.value.length > 25) {
+				alert("비밀번호는 4글자 이상, 25글자 이하여야 합니다!");
+				join.userPwd.focus();
+				return;
+			}
+    	}
 		if(join.userPwd.value != join.userPwd2.value) {
 			alert("비밀번호 확인의 입력값은 비밀번호와 같아야 합니다!");
 			join.userPwd2.focus();
@@ -123,6 +139,7 @@
 			join.userName.focus();
 			return;
 		}
+		join.action = "game_user_update.jsp";
 		join.submit();
 	}
 	

@@ -13,7 +13,7 @@
 	String itemNo = request.getParameter("itemNo");
 	String gameName = request.getParameter("gameName");
 	String price = request.getParameter("price");
-	String uploadPath = request.getServletContext().getRealPath("/") + "img/"; // 원하는 경로
+	String uploadPath = "C:/Users/tj-bu-706-07/git/miniProject1/jsp_mini_project/src/main/webapp/img"; 
 	int discountRate = Integer.parseInt(request.getParameter("discountRate")) / 100;
 	String cDateTime = request.getParameter("cDateTime");
 	String video = request.getParameter("video");
