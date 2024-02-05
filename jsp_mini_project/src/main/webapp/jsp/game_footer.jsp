@@ -12,7 +12,7 @@
         <footer id="gh-footer" class="gh-footer">
             <div class="footer-context">
                 <div>
-                    <a href="#" class="footer-menu">이용약관</a>
+                    <a href="game_agreement.jsp" class="footer-menu">이용약관</a>
                     <a href="#" class="footer-menu">개인정보처리방침</a>
                     <a href="#" class="footer-menu">환불정책</a>
                     <a href="#" class="footer-menu">청소년보호정책</a>

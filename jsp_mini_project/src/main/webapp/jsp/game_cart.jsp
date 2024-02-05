@@ -37,7 +37,7 @@
 			</script>
 			<%
 		}
-		String sql = "SELECT IMAGE, BOARDNO, "
+		String sql = "SELECT IMAGE, BOARDNO, CARTNO, "
 				+ "SUBSTR(GAMENAME, 1, INSTR(GAMENAME, '/')-1) AS GAMENAME, " 
 				+ "PRICE, (DISCOUNTRATE * 100) AS DCRATE, (PRICE * (1- DISCOUNTRATE)) AS PRICE_DC "
 				+ "FROM KDH_GAME_CART C "
@@ -79,7 +79,7 @@
 					}
 				%>
 				<tr>
-					<td><input type="button" name="selectDelete" value="선택 삭제"></td>
+					<td><input type="button" name="selectDelete" value="선택 삭제" onclick="fnDelete()"></td>
 					<td colspan="4" style="text-align: left;">합계: </td>
 					<td><%= sum_price %>원</td>
 				</tr>
@@ -102,6 +102,7 @@
 	    		$("input[name=check]").prop("checked", false);
 	    	}
 	    });
+	    
 	    $("input[name=check]").click(function() {
 	    	var total = $("input[name=check]").length;
 	    	var checked = $("input[name=check]:checked").length;
@@ -113,5 +114,11 @@
 	    	}
 	    });
 	});
+
+	function fnDelete() {
+		var form = document.game_cart;
+		form.action = "game_cart_delete.jsp";
+		form.submit();
+	}
 </script>
 </html>

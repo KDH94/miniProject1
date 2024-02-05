@@ -55,11 +55,11 @@
                             <input type="text" name="userName" class="join-input" required placeholder="이름을 입력하세요">
                         </span>
                     </li>
-                    <div class="text-center">
-                        <input type="button" value="회원가입" name="login" class="login-btn join-btn" onclick="isCheck()">
-                        <input type="button" value="취소하기" name="login" class="login-btn join-btn join-cancel" onclick="goHome()">
-                    </div>
                 </ul>
+                    <div class="text-center" style="margin-top: 20px;">
+                        <input type="button" value="회원가입" name="login" class="login-btn join-btn" onclick="fnCheck()">
+                        <input type="button" value="취소하기" name="login" class="login-btn join-btn join-cancel" onclick="cancel()">
+                    </div>
             </fieldset>
             <div class="caution text-center">
                 <strong>※ 아이디는 주문 및 결제 시 필요한 고유 정보로, 가입 후에는 변경이 불가합니다!</strong>
@@ -97,7 +97,7 @@
     	pop = window.open("game_user_idCheck.jsp?userId=" + join.userId.value, "join", "width=520, height=130, top=400, left=770");
 	}
     
-    function isCheck() {
+    function fnCheck() {
     	const regType = /^[a-zA-Z0-9]*$/g;
     	if(join.userId.value == "" || join.userId.value == undefined || join.userId.value == "null") {
 			alert("아이디를 입력해 주세요!");
@@ -146,7 +146,7 @@
 		document.join.email2.value = email;
 	}
     
-    function goHome() {
+    function cancel() {
 		location.href = "game_list.jsp";
 	}
 </script>
