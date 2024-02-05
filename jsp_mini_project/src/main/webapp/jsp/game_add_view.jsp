@@ -9,17 +9,18 @@
 <body>
 	<%@ include file="dbconn.jsp" %>
 	<%	
-	String title = request.getParameter("title");
+	String itemNo = request.getParameter("itemNo");
 	String contents = request.getParameter("contents");
+	String rating = request.getParameter("rating");
 	String userId = (String)session.getAttribute("userId");
 	
-	String sql = "INSERT INTO KDH_GAME_BOARD VALUES (bbs_seq.NEXTVAL, '" + title + "', '" + contents + "', 0, '" + userId +"', 2, SYSDATE, SYSDATE)";
-											//	BOARDNO, 			TITLE, 			CONTENTS, 		HIT, 	USERID, 	KIND, CDATETIME, UDATETIME 
+	String sql = "INSERT INTO KDH_GAME_BOARD VALUES (KDH_GAME_SEQ.NEXTVAL, '" + itemNo + "', '" + contents + "', '" + rating +"', SYSDATE, SYSDATE)";
+													//	BOARDNO, 				ITEMNO, 		CONTENTS, 			RATING, 	CDATETIME, UDATETIME
  	stmt.executeUpdate(sql);
 	%>
 </body>
 <script type="text/javascript">
-	alert("게시글이 등록됐습니다!");
-	location.href = "board_list.jsp";
+	alert("게임이 등록됐습니다!");
+	location.href = "game_list.jsp";
 </script>
 </html>
