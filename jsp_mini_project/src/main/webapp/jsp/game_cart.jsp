@@ -125,8 +125,7 @@
 				form.submit();
 			} else if(txt == "buy") {
 				if(confirm("정말 구매하시겠습니까?")) {
-					var sumPrice = form.sumPrice.value;
-					form.action = "game_cart_buy.jsp?sumPrice=" + sumPrice;
+					form.action = "game_cart_buy.jsp";
 					form.submit();
 				} else {
 					return;

@@ -13,9 +13,21 @@
 	<%@ include file="dbconn.jsp" %>
 	<%
 		Object moneyObj = session.getAttribute("money");
-		int sumPrice = Integer.parseInt(request.getParameter("sumPrice"));
-		
-        if (moneyObj == null) {
+		String cartNo[] = request.getParameterValues("check");
+		String sql = "SELECT (PRICE * (1-DISCOUNTRATE)) AS PRICE_DC FROM KDH_GAME_CART C "
+				+ "INNER JOIN KDH_GAME_PRODUCT P ON C.ITEMNO = P.ITEMNO WHERE CARTNO IN(";
+		for(int i=0; i<cartNo.length; i++){
+			if(!"on".equals(cartNo[i])) {
+				sql += cartNo[i];
+				if(i != cartNo.length-1){
+					sql += ",";
+				}
+			}
+		}
+		sql += ")";
+		ResultSet rs = stmt.executeQuery(sql);
+
+		if (moneyObj == null) {
     %>
             <script>
                 alert("금액 정보를 가져올 수 없습니다.");
@@ -23,7 +35,6 @@
             </script>
     <%
         }
-
         int money = 0; // 기본값 설정
         try {
             money = Integer.parseInt(String.valueOf(moneyObj));
@@ -32,19 +43,32 @@
             e.printStackTrace(); // 또는 로그 등을 통해 에러 확인
             // 처리할 내용을 여기에 추가할 수 있습니다.
         }
-		int leftMoney = money-sumPrice;
+        int sumPrice = 0;
+		while(rs.next()) {
+			sumPrice += rs.getInt("PRICE_DC");
+		}
+		int leftMoney = money - sumPrice;
 		String userId = (String)session.getAttribute("userId");
-		String cartNo[] = request.getParameterValues("check");
 		
 		if(leftMoney >= 0) {
-			String sql = "UPDATE KDH_GAME_USER SET MONEY = " + leftMoney + " WHERE USERID = '" + userId + "'";
+			sql = "UPDATE KDH_GAME_USER SET MONEY = " + leftMoney + " WHERE USERID = '" + userId + "'";
+			stmt.executeUpdate(sql);
+			sql = "DELETE FROM KDH_GAME_CART WHERE CARTNO IN(";
+			for(int i=0; i<cartNo.length; i++){
+				if(!"on".equals(cartNo[i])) {
+					sql += cartNo[i];
+					if(i != cartNo.length-1){
+						sql += ",";
+					}
+				}
+			}
+			sql += ")";
 			stmt.executeUpdate(sql);
 			%>
-				<%-- <input type="hidden" name="cartNo" value="<%= cartNo %>"> --%>
 				<script>
 					alert("선택한 상품이 구매되었습니다!");
 					// 마이페이지에서 구매한 상품 보기는 미구현
-					location.href = "game_cart_delete.jsp?cartNo="+ <%= String.join(",", cartNo) %> + "&fromSecondCode=true";
+					location.href = "game_cart.jsp?userId="+ userId;
 				</script>
 			<%
 		} else {
@@ -54,7 +78,7 @@
 			<script>
 				var cash = document.cartBuy.cash.value;
 				alert(cash+"원이 부족하여 구매할 수 없습니다!");
-				// 현재 admin이 직접 쳐서 넣어줘야 함
+				// 현재 모자란 금액은 admin이 직접 쳐서 넣어줘야 함
 				location.href = "game_cart.jsp?userId=" + userId;
 			</script>
 		<%

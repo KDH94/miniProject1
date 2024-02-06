@@ -10,7 +10,7 @@
 	<%@ include file="dbconn.jsp" %>
 	<%
 		String cartNo[] = request.getParameterValues("check");
-		String sql = "DELETE FROM KDH_GAME_CART WHERE CARTNO IN(";	
+		String sql = "DELETE FROM KDH_GAME_CART WHERE CARTNO IN(";
 		for(int i=0; i<cartNo.length; i++){
 			if(!"on".equals(cartNo[i])) {
 				sql += cartNo[i];

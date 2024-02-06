@@ -9,9 +9,11 @@
 <body>
 	<%@ include file="dbconn.jsp"%>
 	<%
-	request.setCharacterEncoding("UTF-8");
 	String boardNo = request.getParameter("boardNo");
+	String itemNo = request.getParameter("itemNo");
 	String sql = "DELETE FROM KDH_GAME_BOARD WHERE BOARDNO = " + boardNo;
+	stmt.executeUpdate(sql);
+	sql = "DELETE FROM KDH_GAME_PRODUCT WHERE ITEMNO = " + itemNo;
 	stmt.executeUpdate(sql);
 	%>
 </body>

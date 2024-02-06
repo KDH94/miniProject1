@@ -36,20 +36,22 @@
 		window.close();
 	}
 	function idCheck() {
+		var form = document.dbCheck;
 		var userId = document.dbCheck.userId.value;
 		const regType = /^[a-zA-Z0-9]*$/g;
 		if(userId == "" || userId == undefined || userId =="null") {
 			alert("아이디를 입력해 주세요!");
+			form.userId.focus();
 			return;
 		}
     	if(userId.length > 10 || userId.length < 5) {
     		alert("아이디는 5자 이상, 10자 이하로 입력하세요!");
-			join.userId.focus();
+			form.userId.focus();
 			return;
     	}
     	if (!regType.test(userId)) {
 			alert("아이디는 영어와 숫자로만 조합해야 합니다!");
-			join.id.focus();
+			form.userId.focus();
 			return;
 		}
     	location.href = "game_user_idCheck.jsp?userId=" + userId;

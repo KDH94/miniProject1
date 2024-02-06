@@ -330,6 +330,20 @@ th {
 	background-color: rgb(220, 152, 56);
 }
 
+.board-btn {
+	width: 120px;
+	height: 60px;
+	background-color: rgb(84, 189, 244);
+	color: #fff;
+	font-size: 20px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.board-btn:hover {
+	background-color: rgb(64, 169, 224);
+}
+
 .underLine {
 	border-bottom: 2px solid rgb(50, 62, 76);
 	margin-bottom: 10px;

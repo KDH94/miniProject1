@@ -44,6 +44,16 @@
     <div id="game-header"></div>
 	<div id="container">
 		<form name="game_list">
+			<%
+				if("A".equals(session.getAttribute("userLevel"))) {
+			%>
+					<div class="right-sorting">
+						<input type="submit" value="게임 등록" formaction="game_add.jsp" class="btn-default btn-gh">
+					</div>
+					<div class="f-clear"></div>
+			<%		
+				}
+			%>
 			<table>
 				<tr>
 					<th style="width: 7%">번호</th>
@@ -75,17 +85,6 @@
 				conn.close();
 			%>
 			</table>
-			<%
-				if("A".equals(session.getAttribute("userLevel"))) {
-			%>
-					<div class="right-sorting">
-						<input type="submit" value="게임 등록" formaction="game_add.jsp" class="btn-default btn-gh">
-						<input type="submit" value="게임 삭제" formaction="game_remove.jsp" class="btn-default btn-gh">
-					</div>
-					<div class="f-clear"></div>
-			<%		
-				}
-			%>
 		</form>
 	</div>
     <div id="game-footer"></div>

@@ -9,6 +9,16 @@
 <body>
 	<%@ include file="dbconn.jsp" %>
 	<%@ page import="java.io.*,java.util.*"%>
+	<%!
+		private String getFileName(Part part) {
+		    for (String content : part.getHeader("content-disposition").split(";")) {
+		        if (content.trim().startsWith("filename")) {
+		            return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+		        }
+		    }
+		    return "";
+		}
+	%>
 	<%
 		request.setCharacterEncoding("UTF-8");
 		String itemNo = request.getParameter("itemNo");
@@ -53,16 +63,7 @@
 	 	out.println(sql);
 	 	stmt.executeUpdate(sql);
 	%>
-	<%!
-		private String getFileName(Part part) {
-		    for (String content : part.getHeader("content-disposition").split(";")) {
-		        if (content.trim().startsWith("filename")) {
-		            return content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
-		        }
-		    }
-		    return "";
-		}
-	%>
+
 </body>
 <script type="text/javascript">
  	alert("게임이 등록됐습니다!");

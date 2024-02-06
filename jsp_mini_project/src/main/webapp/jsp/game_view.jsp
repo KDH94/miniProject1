@@ -42,8 +42,19 @@
 			<div class="text-alter">개발사 <span><%= rs.getString("DEVELOPER") %></span></div>
 			<div class="underLine"></div>
 			<div>
-				<input type="button" value="장바구니" class="cart-btn text-alter" style="margin: 32px 0px 0px 41px"
+		<%
+			if("A".equals(session.getAttribute("userLevel"))) {
+		%>
+				<input type="button" value="수정" class="board-btn" style="margin-left: 25px" onclick="gameUpdate(<%= boardNo %>)">
+				<input type="button" value="삭제" class="board-btn" style="margin: 32px 0px 0px 25px" onclick="gameRemove(<%= boardNo %>, <%= rs.getString("ITEMNO") %>)">
+		<%
+			} else {
+		%>
+				<input type="button" value="장바구니" class="cart-btn text-alter" style="margin: 23px 0px 0px 41px"
 					onclick="isTake('<%= session.getAttribute("userId") %>', <%= rs.getString("ITEMNO") %>)">
+		<%
+			}
+		%>
 			</div>
 		</div>
 		<div class="conBox left">
@@ -75,6 +86,18 @@
 			} else {
 				return;
 			}
+		}
+	}
+	
+	function gameUpdate(boardNo) {
+		location.href = "game_update.jsp?boardNo=" + boardNo;
+	}
+	
+	function gameRemove(boardNo, itemNo) {
+		if(confirm("정말 삭제하실 겁니까?")) {
+			location.href = "game_remove.jsp?boardNo=" + boardNo + "&itemNo=" + itemNo;
+		} else {
+			return;
 		}
 	}
 </script>
