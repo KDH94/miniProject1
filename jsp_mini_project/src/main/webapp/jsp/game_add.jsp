@@ -20,21 +20,27 @@
 	            <li>
 	                <div class="join-divide">상품번호</div>
 	                <span>
-	                	<input type="text" id="itemNo" name="itemNo" class="join-input" required placeholder="숫자만 입력, 3자리 권장.">
+	                	<input type="text" id="itemNo" name="itemNo" class="join-input" required placeholder="숫자만 입력, 3자리 권장." maxlength="5">
 	                </span>
 	                <input class="btn-default btn-check" id="btn_itemCheck" value="중복 확인" onclick="itemCheck()" readonly>
 	             </li>
 	             <li>
 	                 <div class="join-divide">게임명</div>
 	                 <span>
-	                 	<input type="text" name="gameName" class="join-input" required placeholder="「게임 이름/검색될 추가 키워드」">
+	                 	<input type="text" name="gameName" class="join-input" required placeholder="ex) GTA 6">
 	                 </span>
-	                 <span style="color: #a00;">반드시 <span style="font-weight: bold">/</span> 넣을 것!</span>
+	             </li>
+	             <li>
+	                 <div class="join-divide">검색 키워드</div>
+	                 <span>
+	                 	<input type="text" name="searchKeyword" class="join-input" required placeholder="ex) 그타, 지티에이, …">
+	                 </span>
 	             </li>
 	             <li>
 	                 <div class="join-divide">가격</div>
 	                 <span>
 	                 	<input type="text" name="price" class="join-input" required>
+	                 	<span style="color: #fff;">원</span>
 	                 </span>
 	             </li>
 	             <li>

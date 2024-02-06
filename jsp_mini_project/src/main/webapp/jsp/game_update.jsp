@@ -15,7 +15,7 @@
 	<%
 		String boardNo = request.getParameter("boardNo");
 		String sql = "SELECT BOARDNO, P.ITEMNO, CONTENTS, RATING, GAMENAME, PRICE, IMAGE, "
-				   + "(DISCOUNTRATE * 100) AS DC_RATE, P.CDATETIME, VIDEO "
+				   + "(DISCOUNTRATE * 100) AS DC_RATE, TO_CHAR(P.CDATETIME, 'YYYY-MM-DD') AS RELEASEDAY, VIDEO "
 				   + "FROM KDH_GAME_BOARD B "
 				   + "INNER JOIN KDH_GAME_PRODUCT P ON B.ITEMNO = P.ITEMNO "
 				   + "WHERE BOARDNO = " + boardNo;
@@ -54,21 +54,28 @@
 	                 <div class="join-divide">게임명</div>
 	                 <span>
 	                 	<input type="text" name="gameName" class="join-input" required
-	                 		value="<%= rs.getString("GAMENAME") %>" placeholder="「게임 이름/검색될 추가 키워드」">
+	                 		value="<%= rs.getString("GAMENAME") %>" placeholder="ex) GTA 6">
 	                 </span>
-	                 <span style="color: #a00;">반드시 <span style="font-weight: bold">/</span> 넣을 것!</span>
+	             </li>
+	             <li>
+	                 <div class="join-divide">검색 키워드</div>
+	                 <span>
+	                 	<input type="text" name="searchKeyword" class="join-input" required placeholder="ex) 그타, 지티에이, …">
+	                 </span>
 	             </li>
 	             <li>
 	                 <div class="join-divide">가격</div>
 	                 <span>
 	                 	<input type="text" name="price" class="join-input" required value="<%= rs.getString("PRICE") %>">
+	                 	<span style="color: #fff;">원</span>
 	                 </span>
 	             </li>
 	             <li>
-	                 <div class="join-divide">이미지</div>
+	                 <div class="join-divide">원본 이미지 명</div>
 	                 <span>
+            			<input type="text" name="image" class="join-input" value="<%= rs.getString("IMAGE") %>" disabled>
             			<input type="file" name="image" class="join-input" required>
-            			<span style="color: #a00;">파일 크기 2MB 이하만 업로드</span>
+            			<div style="color: #a00;">파일 크기 2MB 이하만 업로드</div>
 						<!-- <input type="button" value="업로드" onclick="uploadImage()"> -->
 	                </span>
 	            </li>
@@ -83,7 +90,7 @@
 	             <li>
 	                 <div class="join-divide">출시일</div>
 	                 <span>
-	                     <input type="date" name="cDateTime" class="join-input" required value="<%= rs.getString("CDATETIME") %>">
+	                     <input type="date" name="cDateTime" class="join-input" required value="<%= rs.getString("RELEASEDAY") %>">
 	                 </span>
 	             </li>
 	             <li>
@@ -108,7 +115,7 @@
 	            <li>
 	                <div class="join-divide">내용</div>
 	                <span>
-	                    <textarea rows="10" cols="80" name="contents" required
+	                    <textarea rows="10" cols="80" name="contents" required class="txtArea"
 							placeholder="※작성법: 처음엔 '...社에서 만든~'으로 작성. 여기서 ...엔 회사명을 넣으며, 반드시 社 입력할 것."><%= rs.getString("CONTENTS") %></textarea>
 	                </span>
 	            </li>

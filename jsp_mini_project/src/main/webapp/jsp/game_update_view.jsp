@@ -24,6 +24,7 @@
 		String boardNo = request.getParameter("boardNo");
 		String itemNo = request.getParameter("itemNo");
 		String gameName = request.getParameter("gameName");
+		String searchKeyword = request.getParameter("searchKeyword");		
 		String price = request.getParameter("price");
 		String image = "";
 		float discountRate = (Float.parseFloat(request.getParameter("discountRate")) / 100);
@@ -59,9 +60,15 @@
 		    responseMessage = "파일 업로드 실패: " + e.getMessage();
 		}
 		out.println(responseMessage);
+		
+		String imageStr = "";
+		if(image != null && !image.equals("")) {
+			imageStr = "', IMAGE = '" + image;
+		}
+		gameName = gameName + " / " + searchKeyword;
 	 	sql = "UPDATE KDH_GAME_PRODUCT SET GAMENAME = '" + gameName
 			+ "', PRICE = '" + price
-			+ "', IMAGE = '" + image
+			+ imageStr
 			+ "', DISCOUNTRATE = " + discountRate
 			+ ", CDATETIME = '" + cDateTime
 			+"', VIDEO = '" + video
@@ -69,10 +76,9 @@
 	 	out.println(sql);
 	 	stmt.executeUpdate(sql);
 	%>
-
 </body>
 <script type="text/javascript">
- 	alert("게임 정보가 수정됐습니다!");
-	location.href = "game_list.jsp";
+  	alert("게임 정보가 수정됐습니다!");
+	location.href = "game_view.jsp?boardNo=" + <%= boardNo %>;
 </script>
 </html>

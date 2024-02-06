@@ -13,6 +13,7 @@
 		request.setCharacterEncoding("UTF-8");
 		String itemNo = request.getParameter("itemNo");
 		String gameName = request.getParameter("gameName");
+		String searchKeyword = request.getParameter("searchKeyword");
 		String price = request.getParameter("price");
 		String image = "";
 		float discountRate = (Float.parseFloat(request.getParameter("discountRate")) / 100);
@@ -48,6 +49,8 @@
 		    responseMessage = "파일 업로드 실패: " + e.getMessage();
 		}
 		out.println(responseMessage);
+		
+		gameName = gameName + " / " + searchKeyword;
 	 	sql = "INSERT INTO KDH_GAME_PRODUCT VALUES ('" + itemNo + "', '" + gameName + "', '" + price + "', '" + image +  "', " + discountRate + ", '" + cDateTime + "', '" + video + "')";
 													//	 ITEMNO, 		   GAMENAME,		   PRICE, 		  	IMAGE, 			 DISCOUNTRATE, 		    CDATETIME,			 VIDEO
 	 	out.println(sql);
