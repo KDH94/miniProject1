@@ -15,7 +15,7 @@
 		String userName = request.getParameter("userName");
 		String email_f = request.getParameter("email");
 		String email_b = request.getParameter("email2");
-		String email = email_f + email_b;
+		String email = email_f + "@" + email_b;
 		String money = request.getParameter("money");
 		
 		String pwdStr = "";

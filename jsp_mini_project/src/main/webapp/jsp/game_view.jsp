@@ -7,12 +7,17 @@
     <link rel="stylesheet" href="../css/mini_project_style.css">
 	<meta charset="UTF-8">
 	<title>게임 상세 정보</title>
+<style>
+	img {
+		border-radius: 10px;
+	}
+</style>
 </head>
 <body>
 <%@ include file="dbconn.jsp" %>
 <%
 	String boardNo = request.getParameter("boardNo");
-	String sql = "SELECT IMAGE, PRICE, VIDEO, P.ITEMNO, "
+	String sql = "SELECT IMAGE, PRICE, VIDEO, P.ITEMNO, RATING, CONTENTS, "
 			+ "(PRICE * (1- DISCOUNTRATE)) AS PRICE_DC, TO_CHAR(P.CDATETIME, 'YYYY-MM-DD') AS DATE_R, "
 			+ "SUBSTR(CONTENTS, 1, INSTR(CONTENTS, '社')-1) AS DEVELOPER "
 			+ "FROM KDH_GAME_PRODUCT P "
@@ -59,12 +64,31 @@
 		</div>
 		<div class="conBox left">
 		<!-- 요구사항과 간단한 게임 소개 -->
-			<div class="text-alter">요구사항과 간단한 게임 정보</div>
+			<div class="text-alter">간단한 게임 정보</div>
 			<fieldset>
-				<legend>요구사항</legend>
+				<legend>게임 등급</legend>
 				<div class="text-alter">
-					TEST TEXT
+					<%= rs.getString("CONTENTS") %>
 				</div>
+			<%
+				if("ALL".equals(rs.getString("RATING"))) {
+			%>
+				<img alt="" src="../img/ALL.jpg">
+			<%
+				} else if("12".equals(rs.getString("RATING"))) {
+			%>
+				<img alt="" src="../img/12.jpg">
+			<% 
+				} else if("15".equals(rs.getString("RATING"))) {
+			%>
+				<img alt="" src="../img/15.jpg">
+			<%
+				} else if("18".equals(rs.getString("RATING"))) {
+			%>
+				<img alt="" src="../img/18.jpg">
+			<%
+				}
+			%>
 			</fieldset>
 		</div>
 	</div>

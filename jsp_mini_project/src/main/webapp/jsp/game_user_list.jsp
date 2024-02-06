@@ -14,7 +14,6 @@
 		if("U".equals(session.getAttribute("userLevel")) || session.getAttribute("userLevel") == null) {
 	%>
 		<script>
-			alert("관리자만 들어갈 수 있습니다!");
 			location.href = "game_list.jsp";
 		</script>
 	<%

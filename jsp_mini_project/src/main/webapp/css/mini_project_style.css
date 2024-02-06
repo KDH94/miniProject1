@@ -387,3 +387,42 @@ td a:hover {
 	background-color: rgb(34, 47, 62);
 	border: 1px solid rgb(50, 62, 76);
 }
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.grid-item {
+    width: 300px;
+    margin-bottom: 20px;
+}
+.image-container {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    overflow: hidden;
+}
+.game-image {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+}
+.image-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    transform: translateY(100%);
+    border-radius: 10px;
+}
+.image-container:hover .image-info {
+    opacity: 1;
+    transform: translateY(0);
+}
