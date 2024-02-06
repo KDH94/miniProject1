@@ -33,8 +33,8 @@
 	<div id="container">
 	<form name="user_list" style="position: relative; left: 200px;">
 		<div style="margin: 10px 5px 20px 5px;"><span style="color: #fff;">검색어: </span>
-			<input type="text" name="keyword" value="<%= keyword %>" class="search-input si-alter">
-			<input type="button" value="검색" onclick="search()" class="btn-default btn-gh">
+			<input type="text" name="userKeyword" value="<%= keyword %>" class="search-input si-alter">
+			<input type="button" value="검색" onclick="userSearch()" class="btn-default btn-gh">
 		</div>
 		<table>
 			<tr>
@@ -78,6 +78,10 @@
 	<div id="game-footer"></div>
 </body>
 <script>
+    $(function(){
+        $("#game-header").load("game_header.jsp");
+        $("#game-footer").load("game_footer.jsp");
+    });
 	function userUpdate(userId){
 		location.href="game_user_update.jsp?userId=" + userId;
 	}
@@ -91,9 +95,9 @@
 	function userInit(userId) {
 		location.href="game_user_login_init.jsp?userId=" + userId;
 	}
-    $(function(){
-        $("#game-header").load("game_header.jsp");
-        $("#game-footer").load("game_footer.jsp");
-    });
+	function userSearch() {
+		var form = document.user_list;
+		location.href = "game_user_list.jsp?keyword=" + form.userKeyword.value;
+	}
 </script>
 </html>

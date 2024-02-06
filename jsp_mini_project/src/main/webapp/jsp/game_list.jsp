@@ -22,8 +22,8 @@
 <body>
 	<%@ include file="dbconn.jsp"%>
 	<%
-		out.println("접속한 id: "+session.getAttribute("userId"));
-		out.println("접속한 유저: "+session.getAttribute("userName"));
+//		out.println("접속한 id: "+session.getAttribute("userId"));
+//		out.println("접속한 유저: "+session.getAttribute("userName"));
 		String sql = "SELECT BOARDNO, GAMENAME, IMAGE, "
 				+ "SUBSTR(GAMENAME, 1, INSTR(GAMENAME, '/')-1) AS GAMENAME2, "
 				+ "PRICE, (DISCOUNTRATE * 100) AS DC_RATE, "

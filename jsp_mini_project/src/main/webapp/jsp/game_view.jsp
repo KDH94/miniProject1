@@ -27,7 +27,7 @@
 		<!-- 영상 나오는 박스 -->
 		    <div style="margin: 10px;">
 		    	<iframe width="560" height="315" src="https://www.youtube.com/embed/<%= rs.getString("VIDEO") %>" frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
 				</iframe>
     		</div>
 		</div>

@@ -139,7 +139,7 @@
 			join.userName.focus();
 			return;
 		}
-		join.action = "game_user_update.jsp";
+		join.action = "game_user_update_view.jsp";
 		join.submit();
 	}
 	

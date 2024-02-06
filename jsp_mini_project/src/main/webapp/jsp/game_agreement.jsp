@@ -8,6 +8,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+<style>
+    .context-default {
+        color: #fff;
+        margin-top: 40px;
+    }
+    .context-title {
+        font-size: 30px;
+        margin-top: 120px;
+    }
+</style>
 </head>
 <body>
     <div id="container">

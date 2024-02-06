@@ -13,7 +13,7 @@
 		String userId = request.getParameter("userId");
 		String itemNo = request.getParameter("itemNo");
 	
-		String sql = "INSERT INTO KDH_GAME_CART VALUES ('3', '"
+		String sql = "INSERT INTO KDH_GAME_CART VALUES (KDH_CART_SEQ.NEXTVAL, '"
 				+ userId + "', " + itemNo + ", SYSDATE)";
 	 	stmt.executeUpdate(sql);
 		//out.println(sql);
