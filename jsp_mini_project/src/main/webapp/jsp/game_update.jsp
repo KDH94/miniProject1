@@ -21,6 +21,20 @@
 				   + "WHERE BOARDNO = " + boardNo;
 		ResultSet rs = stmt.executeQuery(sql);
 		rs.next();
+		String rating = rs.getString("RATING");
+		String all = "";
+		String twelve = "";
+		String fifteen = "";
+		String eighteen= "";
+		if(rating.equals("all")) {
+			all = "selected";
+		} else if(rating.equals("12")) {
+			twelve = "selected";
+		} else if(rating.equals("15")) {
+			fifteen = "selected";
+		} else if(rating.equals("18")) {
+			eighteen = "selected";
+		}
 	%>
 	<div id="game-header"></div>
 	<form name="game_update" method="post" enctype="multipart/form-data">
@@ -29,10 +43,11 @@
 	        <legend>게임 수정</legend>
 	        <ul>
 	            <li>
+	            	<input type="hidden" name="boardNo" value="<%= boardNo %>">
 	                <div class="join-divide">상품번호</div>
 	                <span>
 	                	<input type="text" id="itemNo" name="itemNo" class="join-input" required
-							placeholder="숫자만 입력, 3자리 권장." value="<%= rs.getString("ITEMNO") %>" readonly>
+							value="<%= rs.getString("ITEMNO") %>" readonly>
 	                </span>
 	             </li>
 	             <li>
@@ -74,11 +89,11 @@
 	             <li>
 	                 <div class="join-divide">이용등급</div>
 	                 <span>
-						<select name="rating" id="" class="join-input" value="<%= rs.getString("RATING") %>">
-							<option value="ALL">전체이용가</option>
-							<option value="12">12세</option>
-							<option value="15">15세</option>
-							<option value="18">18세</option>
+						<select name="rating" id="" class="join-input">
+							<option value="ALL" <%= all %>>전체이용가</option>
+							<option value="12" <%= twelve %>>12세</option>
+							<option value="15" <%= fifteen %>>15세</option>
+							<option value="18" <%= eighteen %>>18세</option>
 						</select>
 	                 </span>
 	             </li>

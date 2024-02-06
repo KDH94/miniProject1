@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게임 등록 진행</title>
+<title>게임 수정 진행</title>
 </head>
 <body>
 	<%@ include file="dbconn.jsp" %>
@@ -21,6 +21,7 @@
 	%>
 	<%
 		request.setCharacterEncoding("UTF-8");
+		String boardNo = request.getParameter("boardNo");
 		String itemNo = request.getParameter("itemNo");
 		String gameName = request.getParameter("gameName");
 		String price = request.getParameter("price");
@@ -31,8 +32,8 @@
 		String contents = request.getParameter("contents");
 		String rating = request.getParameter("rating");
 		
-		String sql = "INSERT INTO KDH_GAME_BOARD VALUES (KDH_GAME_SEQ.NEXTVAL, '" + itemNo + "', '" + contents + "', '" + rating +"', SYSDATE, SYSDATE)";
-													//	 BOARDNO, 					ITEMNO, 		  CONTENTS, 		  RATING, 	 CDATETIME, UDATETIME
+		String sql = "UPDATE KDH_GAME_BOARD SET CONTENTS = '" + contents
+				   + "', RATING = '" + rating + "', UDATETIME = SYSDATE WHERE BOARDNO = '" + boardNo + "'";
 		out.println(sql);
 	 	stmt.executeUpdate(sql);
 											
@@ -58,15 +59,20 @@
 		    responseMessage = "파일 업로드 실패: " + e.getMessage();
 		}
 		out.println(responseMessage);
-	 	sql = "INSERT INTO KDH_GAME_PRODUCT VALUES ('" + itemNo + "', '" + gameName + "', '" + price + "', '" + image +  "', " + discountRate + ", '" + cDateTime + "', '" + video + "')";
-													//	 ITEMNO, 		   GAMENAME,		   PRICE, 		  	IMAGE, 			 DISCOUNTRATE, 		    CDATETIME,			 VIDEO
+	 	sql = "UPDATE KDH_GAME_PRODUCT SET GAMENAME = '" + gameName
+			+ "', PRICE = '" + price
+			+ "', IMAGE = '" + image
+			+ "', DISCOUNTRATE = " + discountRate
+			+ ", CDATETIME = '" + cDateTime
+			+"', VIDEO = '" + video
+			+ "' WHERE ITEMNO = '" + itemNo + "'";
 	 	out.println(sql);
 	 	stmt.executeUpdate(sql);
 	%>
 
 </body>
 <script type="text/javascript">
- 	alert("게임이 등록됐습니다!");
+ 	alert("게임 정보가 수정됐습니다!");
 	location.href = "game_list.jsp";
 </script>
 </html>
